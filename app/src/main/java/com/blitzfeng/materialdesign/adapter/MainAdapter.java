@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.blitzfeng.materialdesign.R;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class MainAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.recyler_item_main,parent);
+        View v = inflater.inflate(R.layout.recyler_item_main,parent,false);
         ViewHolder holder = new ViewHolder(v);
         ViewUtils.inject(holder,v);
         return holder;
@@ -39,12 +40,13 @@ public class MainAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
+        LogUtils.i(list.get(position)+"---");
         viewHolder.contentTv.setText(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
     static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -52,6 +54,7 @@ public class MainAdapter extends RecyclerView.Adapter {
         private TextView contentTv;
         public ViewHolder(View itemView) {
             super(itemView);
+       //     contentTv = (TextView) itemView.findViewById(R.id.tv_content);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.blitzfeng.materialdesign;
 
 import android.animation.Animator;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
 import android.transition.Transition;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -24,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.blitzfeng.materialdesign.adapter.MainAdapter;
+import com.blitzfeng.materialdesign.view.SlideInOutBottomItemAnimator;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -60,8 +63,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         getWindow().setEnterTransition(new Explode().setDuration(1000));
-        getWindow().setExitTransition(null);
+        getWindow().setExitTransition(new Explode());
+
         ViewUtils.inject(this);
+        configActionBar();
         btn_1.setOnClickListener(this);
         btn_2.setOnClickListener(this);
         btn_3.setOnClickListener(this);
@@ -73,8 +78,15 @@ public class MainActivity extends Activity implements View.OnClickListener{
         adapter = new MainAdapter(this,list);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setItemAnimator(new SlideInOutBottomItemAnimator(recyclerView));
         recyclerView.setAdapter(adapter);
+
+    }
+
+    private void configActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setLogo(R.drawable.ic_action_storage);
+    //    actionBar.setCustomView(R.drawable.ic_action_accept);
 
     }
 
@@ -127,5 +139,28 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 break;
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
