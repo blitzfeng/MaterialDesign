@@ -1,8 +1,10 @@
 package com.blitzfeng.materialdesign;
 
 import android.animation.Animator;
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -61,9 +63,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getWindow().setEnterTransition(new Explode().setDuration(1000));
-        getWindow().setExitTransition(new Explode());
+        setEnterAnim();
 
         ViewUtils.inject(this);
         configActionBar();
@@ -82,10 +82,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
         recyclerView.setAdapter(adapter);
 
     }
-
+    @TargetApi(21)
+    private void setEnterAnim(){
+        if(Build.VERSION.SDK_INT>=21){
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            getWindow().setEnterTransition(new Explode().setDuration(1000));
+            getWindow().setExitTransition(new Explode());
+        }
+    }
     private void configActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setLogo(R.drawable.ic_action_storage);
+        actionBar.setIcon(R.drawable.ic_action_storage);
+        actionBar.setTitle("Material");
     //    actionBar.setCustomView(R.drawable.ic_action_accept);
 
     }
@@ -97,7 +105,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         return list;
     }
 
-
+    @TargetApi(21)
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -144,9 +152,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
@@ -157,8 +164,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_add:
+
+                return true;
+            case R.id.action_menu:
+
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

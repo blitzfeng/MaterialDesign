@@ -1,8 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:a="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_add" android:title="add" android:onClick="add()"
-        app:showAsAction="ifRoom" android:icon="@drawable/ic_action_new"></item>
+
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="ifRoom" android:icon="@drawable/ic_action_settings" />
+         a:showAsAction="ifRoom" android:icon="@drawable/ic_action_settings"
+         android:showAsAction="ifRoom"
+        />
+    <item android:id="@+id/action_add" android:orderInCategory="101" android:title="add" a:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_new" android:showAsAction="ifRoom"
+        ></item>
+    <item android:id="@+id/action_menu" android:title="menu" android:icon="@drawable/ic_action_storage" android:showAsAction="ifRoom"></item>
 </menu>
