@@ -92,7 +92,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
     private void configActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setIcon(R.drawable.ic_action_storage);
+        actionBar.setIcon(R.drawable.ic_launcher);
         actionBar.setTitle("Material");
     //    actionBar.setCustomView(R.drawable.ic_action_accept);
 

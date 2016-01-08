@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
-         a:showAsAction="ifRoom" android:icon="@drawable/ic_action_settings"
-         android:showAsAction="ifRoom"
+         a:showAsAction="ifRoom"
+
         />
     <item android:id="@+id/action_add" android:orderInCategory="101" android:title="add" a:showAsAction="ifRoom"
-        android:icon="@drawable/ic_action_new" android:showAsAction="ifRoom"
+
         ></item>
-    <item android:id="@+id/action_menu" android:title="menu" android:icon="@drawable/ic_action_storage" android:showAsAction="ifRoom"></item>
+    <item android:id="@+id/action_menu" android:title="menu"  a:showAsAction="ifRoom"></item>
 </menu>
